@@ -3,10 +3,10 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
-# Fetch VOO data from yfinance (daily prices)
-def get_voo_data(start_date: str, end_date: str):
-    voo = yf.Ticker('SPY')
-    data = voo.history(start=start_date, end=end_date, interval='1d')
+# Fetch ticker data from yfinance (daily prices)
+def get_ticker_data(start_date: str, end_date: str):
+    ticker = yf.Ticker('SPY')
+    data = ticker.history(start=start_date, end=end_date, interval='1d')
     data['SMA_204'] = data['Close'].rolling(window=204).mean()
     return data
 
@@ -74,7 +74,7 @@ def compare_strategies(optimized_portfolio, regular_portfolio):
 
 # Main function to run the simulation
 def run_simulation(start_date, end_date):
-    data = get_voo_data(start_date, end_date)
+    data = get_ticker_data(start_date, end_date)
     deposits = generate_deposit_dates(data)
     
     # Simulate optimized deposits
